@@ -18,7 +18,6 @@ import sys, os
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.append('..')
-import Geoclue
 
 class Mock(object):
     def __init__(self, *args, **kwargs):
@@ -41,6 +40,8 @@ MOCK_MODULES = [
     ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = Mock()
+
+import Geoclue
 
 # -- General configuration -----------------------------------------------------
 
