@@ -18,7 +18,7 @@ import os
 import math
 
 import dbus
-from dbus.mainloop.glib import DBusGMainLoop
+from dbus.mainloop.glib import DBusGMainLoop as DBusGMainLoop
 
 import geoclue
 from Signal import Signal
