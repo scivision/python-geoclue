@@ -24,7 +24,7 @@ class Mock(object):
        pass
 
    def __new__(self, *args, **kwargs):
-       return Mock()
+      return object() 
 
    def __call__(self, *args, **kwargs):
        return Mock()
