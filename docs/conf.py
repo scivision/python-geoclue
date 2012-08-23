@@ -19,33 +19,29 @@ import sys, os
 #sys.path.insert(0, os.path.abspath('.'))
 sys.path.append('..')
 
-class Mock(object):
-   def __init__(self, *args, **kwargs):
-       pass
 
-   def __new__(self, *args, **kwargs):
-      return object() 
+class ModuleMock(type):
+    """
+    Mock class to avoid import errors when building the documentation
+    in readthedocs.org
+    """
+    def __getattr__(self, name):
+        full_name = '{0}.{1}'.format(self.__name__, name)
+        if full_name in ('dbus.mainloop.glib.DBusGMainLoop',):
+            return ClassMock()
+        cls = ModuleMock(full_name, (type,), {})
+        return cls
 
-   def __call__(self, *args, **kwargs):
-       return Mock()
 
-   @classmethod
-   def __getattr__(self, name):
-       if name in ('__file__', '__path__'):
-           return '/dev/null'
-       elif name[0] == name[0].upper():
-           return type(name, (), {})
-       else:
-           return Mock()
+class ClassMock(object):
+    def __call__(self, *args, **kwargs):
+        return object()
 
 MOCK_MODULES = [
-    'dbus', 'dbus.mainloop', 'dbus.mainloop.glib', 'DBusGMainLoop',
-    'dbus.mainloop.glib.DBusGMainLoop'
+    'dbus', 'dbus.mainloop', 'dbus.mainloop.glib',
     ]
 for mod_name in MOCK_MODULES:
-    sys.modules[mod_name] = Mock()
-
-import Geoclue
+    sys.modules[mod_name] = ModuleMock(mod_name, (type,), {})
 
 # -- General configuration -----------------------------------------------------
 
