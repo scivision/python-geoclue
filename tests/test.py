@@ -20,9 +20,9 @@ import sys ; sys.path.insert(0, '..')
 import Geoclue as geoclue
 
 def location_change():
-    print "Location info changed:"
-    print geolocation.get_location_info()
-    print "\n"
+    print("Location info changed:")
+    print(geolocation.get_location_info())
+    print("\n")
 
 geolocation = geoclue.DiscoverLocation()
 
@@ -31,9 +31,9 @@ geolocation = geoclue.DiscoverLocation()
 geolocation.init()
 
 location = geolocation.get_location_info()
-print "Location: "
-print location
-print "\n"
+print("Location: ")
+print(location)
+print("\n")
 
 #providers = geolocation.get_available_providers()
 ##print providers
@@ -43,7 +43,7 @@ print "\n"
 ##geolocation.set_requirements(6, 0, True, (1 << 2))
 #
 ## this will get the current position via GPS but it will continue to use
-## the default master provider 
+## the default master provider
 #geolocation.set_position_provider("Gpsd")
 ## as you can see, the signal function displays the GPS position :-)
 #
@@ -54,7 +54,7 @@ print "\n"
 #address['region'] = "Evora"
 #address['country'] = "Portugal"
 #address['countrycode'] = "PT"
-## Localnet provider also uses the address 
+## Localnet provider also uses the address
 #geolocation.set_address_provider("Manual", address)
 #
 #current_address_provider = geolocation.get_address_provider()

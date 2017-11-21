@@ -15,5 +15,3 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from Base import *
-
-VERSION = "0.1"

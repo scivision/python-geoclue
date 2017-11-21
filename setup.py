@@ -3,16 +3,16 @@
 from setuptools import setup,find_packages
 
 VERSION = '0.1.0'
-setup(name='python-geoclue',
-        version=VERSION, 
+setup(name='Geoclue',
+        version=VERSION,
         author=['Paulo Cabido','Michael Hirsch, Ph.D.'],
         author_email=['paulo.cabido@gmail.com','scivision@users.noreply.github.com'],
         url='https://www.github.com/scivision/python-geoclue',
         description='Geoclue python module',
         long_description="""
-        Python-Geoclue is nice API interface for Geoclue.
+        Python-Geoclue is an API interface for Geoclue.
         Almost all Geoclue methods are available.
-        
+
         It uses the Geoclue D-Bus API in order to facilitate Geoclue's use.
         """,
         packages=find_packages(),
@@ -22,7 +22,6 @@ setup(name='python-geoclue',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-#        'Programming Language :: Python :: 2.6',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules'
         ],
