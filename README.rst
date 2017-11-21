@@ -34,6 +34,7 @@ Geoclue GUI test program::
 
     geoclue-test-gui
 
+
 These don't seem to be working for me.
 
     geoclue-hostip
@@ -45,6 +46,11 @@ These don't seem to be working for me.
 Install::
 
     pip install -e .
+    
+    
+Errors
+======
+Assuming ``geoclue-test-gui`` works for you, but you don't get a location with this program, try running this program as root.
 
 
 Contributions

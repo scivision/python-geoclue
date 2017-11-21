@@ -49,7 +49,6 @@ class DiscoverLocation:
         self.location_info = {}
 
         # Inspired by Pierre-Luc Beaudoin - geoclue_properties.py
-        # TODO: add an exception to this part of the code in case of wrong or nonexisting dir
         self.providers = []
 
         try:
@@ -57,11 +56,11 @@ class DiscoverLocation:
         except FileNotFoundError as e:
             raise FileNotFoundError('Do you have location providers installed? Specify by DiscoverLocation(my_provider_path). See README.  {}'.format(e))
 
-        for filename in dir:
-            (name, ext) = os.path.splitext(filename)
+        for fn in dir:
+            (name, ext) = os.path.splitext(fn)
 
             if ext == ".provider":
-                complete = os.path.join(providers_path, filename)
+                complete = os.path.join(providers_path, fn)
                 provider = geoclue.GeoclueProvider (complete)
                 self.providers.append([provider,
                   provider.name,

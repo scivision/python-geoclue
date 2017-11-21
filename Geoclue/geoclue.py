@@ -83,23 +83,23 @@ class GeoclueProvider():
         Takes the path to a .provider file
         '''
 
-        file = configparser.RawConfigParser()
-        file.read(filename)
+        cfg = configparser.ConfigParser()
+        cfg.read(filename)
 
-        self.name = file.get('Geoclue Provider', 'Name')
-        self.path = file.get('Geoclue Provider', 'Path')
-        self.service = file.get('Geoclue Provider', 'Service')
-        interfaces = file.get('Geoclue Provider', 'Interfaces').split(";")
+        self.name = cfg.get('Geoclue Provider', 'Name')
+        self.path = cfg.get('Geoclue Provider', 'Path')
+        self.service = cfg.get('Geoclue Provider', 'Service')
+        interfaces = cfg.get('Geoclue Provider', 'Interfaces').split(";")
         self.interfaces = INTERFACE_NONE
 
-        for interface in interfaces:
-            if interface == "org.freedesktop.Geoclue.Address":
+        for ifc in interfaces:
+            if ifc == "org.freedesktop.Geoclue.Address":
                self.interfaces += INTERFACE_ADDRESS
-            elif interface == "org.freedesktop.Geoclue.Position":
+            elif ifc == "org.freedesktop.Geoclue.Position":
                self.interfaces += INTERFACE_POSITION
-            elif interface == "org.freedesktop.Geoclue.Geocode":
+            elif ifc == "org.freedesktop.Geoclue.Geocode":
                self.interfaces += INTERFACE_GEOCODE
-            elif interface == "org.freedesktop.Geoclue.ReverseGeocode":
+            elif ifc == "org.freedesktop.Geoclue.ReverseGeocode":
                self.interfaces += INTERFACE_REVERSE_GEOCODE
 
     def get_proxy (self):
