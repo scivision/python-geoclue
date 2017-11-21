@@ -41,13 +41,13 @@ class Signal:
     # execute the slots
     def __call__(self, *args, **kwargs):
         accum = self.create_accumulator()
-        for conn in xrange(len(self.__slots)):
+        for conn in range(len(self.__slots)):
             if not self.__slots[conn][1](accum, *args, **kwargs):
                 break
         return accum.finalize()
     
     def find(self, conn):
-        for i in xrange(len(self.__slots)):
+        for i in range(len(self.__slots)):
             if self.__slots[i][0] == conn:
                 return i
                 
