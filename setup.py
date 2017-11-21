@@ -1,27 +1,21 @@
 #! /usr/bin/env python
 
-import sys,os
-sys.path.insert(0,os.getcwd())
-import Geoclue
-
-from distutils.core import setup
+from setuptools import setup,find_packages
 
 VERSION = '0.1.0'
 setup(name='python-geoclue',
         version=VERSION, 
-        author='Paulo Cabido',
-        author_email='paulo.cabido@gmail.com',
-        url='http://were.it.is.hosted',
-#        download_url='http://were.it.is.hosted/files/python-geoclue-%s.tar.gz' % VERSION,
+        author=['Paulo Cabido','Michael Hirsch, Ph.D.'],
+        author_email=['paulo.cabido@gmail.com','scivision@users.noreply.github.com'],
+        url='https://www.github.com/scivision/python-geoclue',
         description='Geoclue python module',
-        license='GLP3',
         long_description="""
         Python-Geoclue is nice API interface for Geoclue.
         Almost all Geoclue methods are available.
         
         It uses the Geoclue D-Bus API in order to facilitate Geoclue's use.
         """,
-        packages=['Geoclue'],
+        packages=find_packages(),
         classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -32,4 +26,5 @@ setup(name='python-geoclue',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules'
         ],
+        python_requires='>=2.7',
         )
