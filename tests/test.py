@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
-
+import pdb
 import Geoclue as geoclue
 
 def location_change():
@@ -25,10 +25,13 @@ def location_change():
 geolocation = geoclue.DiscoverLocation('/usr/share/geoclue-providers')
 
 #geolocation.connect(location_change)
-
+#pdb.set_trace()
 geolocation.init()
 
 location = geolocation.get_location_info()
+if not location:
+    raise RuntimeError("could not find location")
+
 print("Location: ")
 print(location)
 print("\n")

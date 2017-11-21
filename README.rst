@@ -12,13 +12,34 @@ Acts as a Python API to DBUS `geoclue`.
 Build
 =======
 
-Prereqs::
+Prereqs
+-------
+::
 
-    apt install gcc libdbus-1-dev libdbus-glib-1-dev geoclue
+    apt install gcc libdbus-1-dev libdbus-glib-1-dev geoclue geoclue-examples
 
-You need a location provider. Here we use Skyhook, but you can select another or several others::
+Location Providers
+~~~~~~~~~~~~~~~~~~
+You need a location provider.
+Here we use Skyhook, but you can select another or several others::
 
     apt install geoclue-skyhook
+
+Be sure your location providers are working.
+
+* Skyhook: often within 100 meters in urban locations
+* Ubuntu GeoIP: within a city or county
+
+Geoclue GUI test program::
+
+    geoclue-test-gui
+
+These don't seem to be working for me.
+
+    geoclue-hostip
+    geoclue-plazes
+
+
 
 
 Install::

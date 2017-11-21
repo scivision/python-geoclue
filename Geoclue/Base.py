@@ -103,16 +103,18 @@ class DiscoverLocation:
             try:
                 self.on_address_changed(*self.address.GetAddress())
             except Exception as e:
+                print(e)
                 return False
 
             try:
                 self.on_position_changed(*self.position.GetPosition())
             except Exception as e:
+                print(e)
                 return False
 
             return True
         except Exception as e:
-            print("Error: %s" % e)
+            print("Error: {}".format(e))
             return False
 
     def provider_status(self, provider):
