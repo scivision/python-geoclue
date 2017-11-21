@@ -7,6 +7,7 @@ python:
 os:
   - linux
 
+sudo: required
 dist: trusty
 group: edge
 
@@ -32,6 +33,6 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
-script: coverage run tests/test.py -v
+script: sudo coverage run tests/test.py -v
 
 after_success: coveralls
