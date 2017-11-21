@@ -15,14 +15,17 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import datetime
-import Geoclue as geoclue
+import Geoclue
+import Geoclue.geoclue
 
 
 # feel free to define your own, it's just .ini style files.
-geoloc = geoclue.DiscoverLocation('/usr/share/geoclue-providers')
+geoloc = Geoclue.DiscoverLocation('/usr/share/geoclue-providers')
 
 def test_geolocation():
-    geoloc.init()
+    # finer accuracy than LOCALITY causes Skyhook Ubuntu-geoip to not work.
+    geoloc.init(accuracy=Geoclue.geoclue.ACCURACY_LEVEL_LOCALITY)
+#    geoloc.signal()
 
     loc = geoloc.get_location_info()
     if not loc:

@@ -16,6 +16,7 @@
 from six import PY2
 import os
 import math
+import logging
 #
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop as DBusGMainLoop
@@ -29,7 +30,7 @@ if PY2:
 DBusGMainLoop(set_as_default=True)
 
 class DiscoverLocation:
-    """ Discovers the location form the best available provider
+    """ Discovers the location from the best available provider
 
     L{DiscoverLocation} is a object that provides a nice API interface
     for Geoclue.
@@ -102,18 +103,18 @@ class DiscoverLocation:
             try:
                 self.on_address_changed(*self.address.GetAddress())
             except Exception as e:
-                print(e)
+                logging.error(e)
                 return False
 
             try:
                 self.on_position_changed(*self.position.GetPosition())
             except Exception as e:
-                print(e)
+                logging.error(e)
                 return False
 
             return True
         except Exception as e:
-            print("Error: {}".format(e))
+            logging.critical(e)
             return False
 
     def provider_status(self, provider):
