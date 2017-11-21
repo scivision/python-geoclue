@@ -1,3 +1,10 @@
+.. image:: https://travis-ci.org/scivision/python-geoclue.svg?branch=master
+    :target: https://travis-ci.org/scivision/python-geoclue
+
+.. image:: https://coveralls.io/repos/github/scivision/python-geoclue/badge.svg?branch=master
+    :target: https://coveralls.io/github/scivision/python-geoclue?branch=master
+
+
 ==============
 python-geoclue
 ==============

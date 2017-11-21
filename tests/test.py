@@ -24,19 +24,21 @@ def location_change():
 geoloc = geoclue.DiscoverLocation('/usr/share/geoclue-providers')
 
 #geoloc.connect(location_change)
-#pdb.set_trace()
-geoloc.init()
 
-print("location provider: {}".format(geoloc.get_position_provider()))
+def test_geolocation():
+    geoloc.init()
 
-location = geoloc.get_location_info()
-if not location:
-    raise RuntimeError("Could not find location. You may need to run as root.")
+    print("location provider: {}".format(geoloc.get_position_provider()))
 
+    loc = geoloc.get_location_info()
+    if not loc:
+        raise RuntimeError("Could not find location. You may need to run as root.")
 
-print("Location: ")
-print(location)
-print("\n")
+    lat = float(loc['latitude'])
+    lon = float(loc['longitude'])
+
+    print("Lat / Lon {} {}".format(lat,lon))
+
 
 #providers = geoloc.get_available_providers()
 ##print providers
@@ -76,3 +78,6 @@ print("\n")
 ##print "Compare a position to the current position:"
 ##print "Position to compare, lat: %s lon: %s"
 ##geoloc.compare_position(LAT, LON, 0.5)
+
+if __name__ == '__main__':
+    test_geolocation()

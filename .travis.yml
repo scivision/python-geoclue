@@ -1,0 +1,31 @@
+language: python
+fast_finish: true
+
+python:
+  - 2.7
+
+os:
+  - linux
+  
+dist: trusty
+group: edge
+
+addons:
+  apt:
+    packages: ['libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
+
+notifications:
+  email: false
+
+git:
+  depth: 3
+
+
+before_install:
+  - pip -q install coveralls
+
+install: pip install -e .
+
+script: coverage run tests/test.py -v
+
+after_success: coveralls
