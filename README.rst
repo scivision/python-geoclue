@@ -1,9 +1,3 @@
-.. image:: https://travis-ci.org/scivision/python-geoclue.svg?branch=master
-    :target: https://travis-ci.org/scivision/python-geoclue
-
-.. image:: https://coveralls.io/repos/github/scivision/python-geoclue/badge.svg?branch=master
-    :target: https://coveralls.io/github/scivision/python-geoclue?branch=master
-
 .. image:: https://api.codeclimate.com/v1/badges/8144d23658b88eb86d20/maintainability
    :target: https://codeclimate.com/github/scivision/python-geoclue/maintainability
    :alt: Maintainability

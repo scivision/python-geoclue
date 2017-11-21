@@ -14,21 +14,15 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
+from datetime import datetime
 import Geoclue as geoclue
 
-def location_change():
-    print("Location info changed:")
-    print(geoloc.get_location_info())
-    print("\n")
 
+# feel free to define your own, it's just .ini style files.
 geoloc = geoclue.DiscoverLocation('/usr/share/geoclue-providers')
-
-#geoloc.connect(location_change)
 
 def test_geolocation():
     geoloc.init()
-
-    print("location provider: {}".format(geoloc.get_position_provider()))
 
     loc = geoloc.get_location_info()
     if not loc:
@@ -36,37 +30,61 @@ def test_geolocation():
 
     lat = float(loc['latitude'])
     lon = float(loc['longitude'])
+    tpos = datetime.fromtimestamp(int(loc['position_timestamp']))
 
-    print("Lat / Lon {} {}".format(lat,lon))
+    print("{}: timestamp / Lat / Lon  {}   {} {}".format(
+            geoloc.get_position_provider(),tpos,lat,lon))
+
+def location_change():
+    print("Location info changed:")
+    print(geoloc.get_location_info())
 
 
-#providers = geoloc.get_available_providers()
-##print providers
-#
-## when a GPS is available, this will pass to the GPS provider
-## this will change the master's default provider acording to the requirements
-##geoloc.set_requirements(6, 0, True, (1 << 2))
-#
-## this will get the current position via GPS but it will continue to use
-## the default master provider
-#geoloc.set_position_provider("Gpsd")
-## as you can see, the signal function displays the GPS position :-)
-#
-#address = {}
-#address['street'] = "Rua portuguesa num da porta"
-#address['area'] = "Centro Historico"
-#address['locality'] = "Evora"
-#address['region'] = "Evora"
-#address['country'] = "Portugal"
-#address['countrycode'] = "PT"
-## Localnet provider also uses the address
-#geoloc.set_address_provider("Manual", address)
-#
-#current_address_provider = geoloc.get_address_provider()
-#print "Current address provider: %s" % current_address_provider
-#
-#current_position_provider = geoloc.get_position_provider()
-#print "Current position provider: %s" % current_position_provider
+def test_providers():
+    geoloc.init()
+
+    providers = geoloc.get_available_providers()
+    print('Providers:')
+    #print(providers)
+    print('\n'.join([p['name'] for p in providers]))
+    print('')
+
+    current_position_provider = geoloc.get_position_provider()
+    print("Current position provider: {}".format(current_position_provider))
+
+
+def test_gpsd():
+    """
+    when a GPS is available, this will pass to the GPS provider
+    this will change the master's default provider acording to the requirements
+    """
+
+    geoloc.set_requirements(6, 0, True, (1 << 2))
+
+    """
+    this will get the current position via GPS but it will continue to use
+    the default master provider
+    """
+
+    geoloc.set_position_provider("Gpsd")
+    """as you can see, the signal function displays the GPS position :-)"""
+
+
+def test_manual():
+    address = {}
+    address['street'] = "Rua portuguesa num da porta"
+    address['area'] = "Centro Historico"
+    address['locality'] = "Evora"
+    address['region'] = "Evora"
+    address['country'] = "Portugal"
+    address['countrycode'] = "PT"
+    # Localnet provider also uses the address
+    geoloc.set_address_provider("Manual", address)
+
+    current_address_provider = geoloc.get_address_provider()
+    print("Current address provider: {}".format(current_address_provider))
+
+
 #
 #print "Reverse address for coordinates lat: 38.5833333 and lon: -7.8333333"
 #revgeocoder = geoloc.reverse_position(38.5833333, -7.833333, 3)
@@ -80,4 +98,5 @@ def test_geolocation():
 ##geoloc.compare_position(LAT, LON, 0.5)
 
 if __name__ == '__main__':
+ #   test_providers()
     test_geolocation()

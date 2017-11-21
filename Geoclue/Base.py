@@ -41,7 +41,7 @@ class DiscoverLocation:
         @param providers_path: The path to the providers. The default
         path to the providers is /usr/share/geoclue-providers.
         """
-        self.bus = dbus.SessionBus()
+        self.bus = dbus.SessionBus(private=False)
 
         self.signal = Signal()
 
