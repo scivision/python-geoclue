@@ -6,13 +6,13 @@ python:
 
 os:
   - linux
-  
+
 dist: trusty
 group: edge
 
 addons:
   apt:
-    packages: ['libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
+    packages: ['dbus-x11','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
 
 notifications:
   email: false
