@@ -12,7 +12,7 @@ group: edge
 
 addons:
   apt:
-    packages: ['dbus-x11','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
+    packages: ['xvfb','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
 
 notifications:
   email: false
@@ -25,6 +25,12 @@ before_install:
   - pip -q install coveralls
 
 install: pip install -e .
+
+before_script:
+# https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 
 script: coverage run tests/test.py -v
 
