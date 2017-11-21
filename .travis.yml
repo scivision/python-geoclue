@@ -12,7 +12,7 @@ group: edge
 
 addons:
   apt:
-    packages: ['xvfb','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
+    packages: ['dbus-x11','xvfb','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip']
 
 notifications:
   email: false
