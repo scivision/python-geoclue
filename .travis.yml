@@ -33,8 +33,6 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
-script: sudo python tests/test.py
+script: sudo ~/virtualenv/python2.7/bin/python -m coverage run tests/test.py
 
-after_success:
-  - coverage run tests/test.py
-  - coveralls
+after_success: coveralls
