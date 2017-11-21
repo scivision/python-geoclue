@@ -20,7 +20,7 @@ import math
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop as DBusGMainLoop
 #
-import geoclue
+from . import geoclue
 from .Signal import Signal
 
 DBusGMainLoop(set_as_default=True)
@@ -97,17 +97,17 @@ class DiscoverLocation:
 
             try:
                 self.on_address_changed(*self.address.GetAddress())
-            except Exception, e:
+            except Exception as e:
                 return False
 
             try:
                 self.on_position_changed(*self.position.GetPosition())
-            except Exception, e:
+            except Exception as e:
                 return False
 
             return True
-        except Exception, e:
-            print "Error: %s" % e
+        except Exception as e:
+            print("Error: %s" % e)
             return False
 
     def provider_status(self, provider):
@@ -170,24 +170,24 @@ class DiscoverLocation:
 
         @address: The new address.
         """
-        if address.has_key('street'):
+        if 'street' in address:
             self.location_info['street'] = address['street']
 
         # TODO: postalcode ?
 
-        if address.has_key('area'):
+        if 'area' in address:
             self.locatio_info['area'] = address['area']
 
-        if address.has_key('locality'):
+        if 'locality' in address:
             self.location_info['locality'] = address['locality']
 
-        if address.has_key('country'):
+        if 'country' in address:
             self.location_info['country'] = address['country']
 
-        if address.has_key('region'):
+        if 'region' in address:
             self.location_info['region'] = address['region']
 
-        if address.has_key('countrycode'):
+        if 'countrycode' in address:
             self.location_info['countrycode'] = address['countrycode']
 
     def on_address_changed(self, timestamp, address, accuracy):
@@ -285,14 +285,14 @@ class DiscoverLocation:
         try:
             tmp_provider = current_provider[0].get_proxy()
             self.position = dbus.Interface(tmp_provider, dbus_interface=geoclue.POSITION_IFACE)
-        except Exception, e:
-            print "D-Bus error: %s" % e
+        except Exception as e:
+            print("D-Bus error: %s" % e)
             return False
 
         try:
             self.on_position_changed(*self.position.GetPosition())
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
         return True
 
@@ -303,34 +303,34 @@ class DiscoverLocation:
         @return: The address (with possible corrections).
         """
         tmp_address = {}
-        if address.has_key('street'):
+        if 'street' in address:
             tmp_address['street'] = address['street']
         else:
             tmp_address['street'] = ""
 
         # TODO: postalcode ?
 
-        if address.has_key('area'):
+        if 'area' in address:
                 tmp_address['area'] = address['area']
         else:
             tmp_address['area'] = ""
 
-        if address.has_key('locality'):
+        if 'locality' in address:
                 tmp_address['locality'] = address['locality']
         else:
             tmp_address['locality'] = ""
 
-        if address.has_key('country'):
+        if 'country' in address:
             tmp_address['country'] = address['country']
         else:
             tmp_address['country'] = ""
 
-        if address.has_key('region'):
+        if 'region' in address:
             tmp_address['region'] = address['region']
         else:
             tmp_address['region'] = ""
 
-        if address.has_key('countrycode'):
+        if 'countrycode' in address:
             tmp_address['countrycode'] = address['countrycode']
         else:
             tmp_address['countrycode'] = ""
@@ -365,14 +365,14 @@ class DiscoverLocation:
                 return False
             else:
                 self.address = dbus.Interface(current_provider[0].get_proxy(), dbus_interface=geoclue.ADDRESS_IFACE)
-        except Exception, e:
-            print "D-Bus error: %s" % e
+        except Exception as e:
+            print("D-Bus error: %s" % e)
             return False
 
         try:
             self.on_address_changed(*self.address.GetAddress())
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
         return True
 
@@ -445,11 +445,11 @@ class DiscoverLocation:
             #add the values to the address of the location variable
             tmp_address = {}
             for key, item in revaddress[0].items():
-                tmp_address[unicode(key)] = unicode(item)
+                tmp_address[str(key)] = str(item)
 
             return self.validate_address(tmp_address)
-        except Exception, e:
-            print "D-Bus error: %s" % e
+        except Exception as e:
+            print("D-Bus error: %s" % e)
             return None
 
     def connect(self, func):
