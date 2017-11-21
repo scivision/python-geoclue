@@ -27,5 +27,5 @@ setup(name='Geoclue',
         'Topic :: Software Development :: Libraries :: Python Modules'
         ],
         install_requires=req,
-        python_requires='==2.7',
+        python_requires='==2.7.*',
         )
