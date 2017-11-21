@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import ConfigParser
+import configparser
 import dbus
 
 POSITION_FIELDS_NONE = 0
@@ -83,7 +83,7 @@ class GeoclueProvider():
         Takes the path to a .provider file
         '''
 
-        file = ConfigParser.RawConfigParser()
+        file = configparser.RawConfigParser()
         file.read(filename)
 
         self.name = file.get('Geoclue Provider', 'Name')

@@ -45,9 +45,8 @@ class DiscoverLocation:
         # stores the location info
         self.location_info = {}
 
-        # Insipered by Pierre-Luc Beaudoin - geoclue_properties.py
-        # TODO: add an exception to this part of the code in case of the wrong
-        # or nonexisting dir
+        # Inspired by Pierre-Luc Beaudoin - geoclue_properties.py
+        # TODO: add an exception to this part of the code in case of wrong or nonexisting dir
         self.providers = []
 
         dir = os.listdir(providers_path)
