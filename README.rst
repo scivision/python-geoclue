@@ -14,14 +14,18 @@ Build
 
 Prereqs::
 
-    apt install gcc libdbus-1-dev libdbus-glib-1-dev
+    apt install gcc libdbus-1-dev libdbus-glib-1-dev geoclue
+
+You need a location provider. Here we use Skyhook, but you can select another or several others::
+
+    apt install geoclue-skyhook
 
 
 Install::
 
     pip install -e .
-    
-    
+
+
 Contributions
 =============
 

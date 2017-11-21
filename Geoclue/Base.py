@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
-
+from six import PY2
 import os
 import math
 #
@@ -22,6 +22,9 @@ from dbus.mainloop.glib import DBusGMainLoop as DBusGMainLoop
 #
 from . import geoclue
 from .Signal import Signal
+
+if PY2:
+    FileNotFoundError = OSError
 
 DBusGMainLoop(set_as_default=True)
 
@@ -49,7 +52,10 @@ class DiscoverLocation:
         # TODO: add an exception to this part of the code in case of wrong or nonexisting dir
         self.providers = []
 
-        dir = os.listdir(providers_path)
+        try:
+            dir = os.listdir(providers_path)
+        except FileNotFoundError as e:
+            raise FileNotFoundError('Do you have location providers installed? Specify by DiscoverLocation(my_provider_path). See README.  {}'.format(e))
 
         for filename in dir:
             (name, ext) = os.path.splitext(filename)

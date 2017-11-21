@@ -22,7 +22,7 @@ def location_change():
     print(geolocation.get_location_info())
     print("\n")
 
-geolocation = geoclue.DiscoverLocation()
+geolocation = geoclue.DiscoverLocation('/usr/share/geoclue-providers')
 
 #geolocation.connect(location_change)
 
