@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file is based on the original geoclue.py by Pierre-Luc Beaudoin
-# 
+#
 # Copyright (c) 2009 - Paulo Cabido <paulo.cabido@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify it under
@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import configparser
+from six.moves import configparser
 import dbus
 
 POSITION_FIELDS_NONE = 0
@@ -101,7 +101,7 @@ class GeoclueProvider():
                self.interfaces += INTERFACE_GEOCODE
             elif interface == "org.freedesktop.Geoclue.ReverseGeocode":
                self.interfaces += INTERFACE_REVERSE_GEOCODE
-               
+
     def get_proxy (self):
         self.bus = dbus.SessionBus()
         return self.bus.get_object(self.service, self.path)

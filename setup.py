@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+req = ['six','dbus-python']
+
 from setuptools import setup,find_packages
 
 VERSION = '0.1.0'
@@ -20,10 +22,10 @@ setup(name='Geoclue',
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules'
         ],
+        install_requires=req,
         python_requires='>=2.7',
         )
