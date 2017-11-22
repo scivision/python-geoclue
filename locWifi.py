@@ -42,11 +42,13 @@ if __name__ == '__main__':
 
     logfile = p.logfile
 
+    T = 60 # fastest update rate with Skyhook is one minute
 # %% feel free to define your own, it's just .ini style files.
     geoloc = Geoclue.DiscoverLocation('/usr/share/geoclue-providers')
 # %% finer accuracy than LOCALITY causes Skyhook Ubuntu-geoip to not work.
     geoloc.init(accuracy=Geoclue.geoclue.ACCURACY_LEVEL_LOCALITY)
 
+    print('updating every {} seconds'.format(T))
     while True:
         loc = query_pos(geoloc)
         stat = print_loc(loc)
@@ -55,7 +57,7 @@ if __name__ == '__main__':
             with open(logfile,'a') as f:
                 f.write(stat+'\n')
 
-        sleep(60) # fastest update rate with Skyhook is one minute
+        sleep(T)
 
 
 
