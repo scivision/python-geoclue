@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
         if logfile:
             with open(logfile,'a') as f:
-                f.write(stat)
+                f.write(stat+'\n')
 
         sleep(60) # fastest update rate with Skyhook is one minute
 
