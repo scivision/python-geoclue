@@ -64,10 +64,11 @@ and/or
 work.
 Ifnot, then there's likely an issue with DBUS or your WiFi systems.
 
----
+----
+
 Skyhook update rate is about once per minute--you'll get cached results if you query Skyhook at less than once per minute.
 
----
+----
 
 > dbus.exceptions.DBusException: org.freedesktop.Geoclue.Error.notAvailable: Geoclue master client has no usable Address providers
 
