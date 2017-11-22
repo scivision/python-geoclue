@@ -57,8 +57,12 @@ Currently Python 2.7 is only supported version::
 
 Troubleshooting
 ===============
-First of all, be sure ``geoclue-test-gui`` works.
-If it doesn't, then there's likely an issue with DBUS or your WiFi systems.
+First of all, be sure
+``/usr/bin/geoclue-test-gui``
+and/or
+``/usr/lib/geoclue-2.0/demos/where-am-i``
+work.
+Ifnot, then there's likely an issue with DBUS or your WiFi systems.
 
 ---
 Skyhook update rate is about once per minute--you'll get cached results if you query Skyhook at less than once per minute.
@@ -81,3 +85,10 @@ Notes
 =====
 
 * `Geoclue Reference Manual <https://www.freedesktop.org/software/geoclue/docs/>`_
+
+Geoclue2
+--------
+Here are a couple Python demos using Geoclue2
+
+* https://github.com/kpytang/geoclue2-demo
+* https://github.com/parinporecha/GeoClue2-Locator-python
