@@ -82,40 +82,28 @@ class DiscoverLocation:
         self.accuracy = accuracy
         self.resource = resource
 
-        try:
-            self.master = self.bus.get_object(geoclue.MASTER_IFACE, geoclue.MASTER_PATH)
-            self.client = self.bus.get_object(geoclue.MASTER_IFACE, self.master.Create())
 
-            # connects to detect changes on the address and position providers
-            self.client.connect_to_signal("AddressProviderChanged", self.on_address_provider_changed)
-            self.client.connect_to_signal("PositionProviderChanged", self.on_position_provider_changed)
+        self.master = self.bus.get_object(geoclue.MASTER_IFACE, geoclue.MASTER_PATH)
+        self.client = self.bus.get_object(geoclue.MASTER_IFACE, self.master.Create())
 
-            self.address = dbus.Interface(self.client, dbus_interface=geoclue.ADDRESS_IFACE)
-            self.address.connect_to_signal("AddressChanged", self.on_address_changed)
-            self.client.AddressStart()
+        # connects to detect changes on the address and position providers
+        self.client.connect_to_signal("AddressProviderChanged", self.on_address_provider_changed)
+        self.client.connect_to_signal("PositionProviderChanged", self.on_position_provider_changed)
 
-            self.position = dbus.Interface(self.client, dbus_interface=geoclue.POSITION_IFACE)
-            self.position.connect_to_signal("PositionChanged", self.on_position_changed)
-            self.client.PositionStart()
+        self.address = dbus.Interface(self.client, dbus_interface=geoclue.ADDRESS_IFACE)
+        self.address.connect_to_signal("AddressChanged", self.on_address_changed)
+        self.client.AddressStart()
 
-            self.client.SetRequirements(self.accuracy, 0, True, self.resource)
+        self.position = dbus.Interface(self.client, dbus_interface=geoclue.POSITION_IFACE)
+        self.position.connect_to_signal("PositionChanged", self.on_position_changed)
+        self.client.PositionStart()
 
-            try:
-                self.on_address_changed(*self.address.GetAddress())
-            except Exception as e:
-                logging.error(e)
-                return False
+        self.client.SetRequirements(self.accuracy, 0, True, self.resource)
 
-            try:
-                self.on_position_changed(*self.position.GetPosition())
-            except Exception as e:
-                logging.error(e)
-                return False
+        self.on_address_changed(*self.address.GetAddress())
 
-            return True
-        except Exception as e:
-            logging.critical(e)
-            return False
+        self.on_position_changed(*self.position.GetPosition())
+
 
     def provider_status(self, provider):
         """Checks a provider's status.
@@ -287,21 +275,13 @@ class DiscoverLocation:
                 break
 
         if not provider_exists:
-            return False
+            raise RuntimeError('{} does not exist'.format(provider_name))
+# %% set provider
+        tmp_provider = current_provider[0].get_proxy()
+        self.position = dbus.Interface(tmp_provider, dbus_interface=geoclue.POSITION_IFACE)
+# %% get position update
+        self.on_position_changed(*self.position.GetPosition())
 
-        try:
-            tmp_provider = current_provider[0].get_proxy()
-            self.position = dbus.Interface(tmp_provider, dbus_interface=geoclue.POSITION_IFACE)
-        except Exception as e:
-            print("D-Bus error: %s" % e)
-            return False
-
-        try:
-            self.on_position_changed(*self.position.GetPosition())
-        except Exception as e:
-            print(e)
-
-        return True
 
     def validate_address(self, address):
         """Receives the address and validates/corrects it.

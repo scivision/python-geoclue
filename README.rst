@@ -31,30 +31,41 @@ Here we use Skyhook, but you can select another or several others::
 
 Be sure your location providers are working.
 
-* Skyhook: often within 100 meters in urban locations
-* Ubuntu GeoIP: within a city or county
+* ``geoclue-skyhook``: ~ 100 meter accuracy in urban locations
+* ``geoclue-ubuntu-geoip``: within a city or county
 
-Geoclue GUI test program::
-
-    geoclue-test-gui
-
-
-These don't seem to be working for me.
+These don't seem to be working.
 
     geoclue-hostip
     geoclue-plazes
 
 
-
-
-Install::
+Install
+-------
+::
 
     pip install -e .
     
     
-Errors
-======
-Assuming ``geoclue-test-gui`` works for you, but you don't get a location with this program, try running this program as root.
+Run
+---
+Currently Python 2.7 is only supported version::
+
+    ./locWifi.py
+    
+Troubleshooting
+===============
+First of all, be sure ``geoclue-test-gui`` works. 
+If it doesn't, then there's likely an issue with DBUS or your WiFi systems.
+
+---
+Skyhook update rate is about once per minute--you'll get cached results if you query Skyhook at less than once per minute.
+
+---
+
+> dbus.exceptions.DBusException: org.freedesktop.Geoclue.Error.notAvailable: Geoclue master client has no usable Address providers
+
+This happens if you don't have a working provider configured, or if there isn't an internet connection.
 
 
 Contributions

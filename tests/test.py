@@ -61,6 +61,7 @@ def test_gpsd():
     when a GPS is available, this will pass to the GPS provider
     this will change the master's default provider acording to the requirements
     """
+    geoloc.init()
 
     geoloc.set_requirements(6, 0, True, (1 << 2))
 
