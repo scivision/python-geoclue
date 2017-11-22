@@ -28,4 +28,5 @@ setup(name='Geoclue',
         ],
         install_requires=req,
         python_requires='==2.7.*',
+        extras_require={'kml':['simplekml','numpy']},
         )

@@ -25,7 +25,7 @@ Prereqs
 Location Providers
 ~~~~~~~~~~~~~~~~~~
 You need a location provider.
-Here we use Skyhook, but you can select another or several others::
+Here we use `Skyhook <http://www.skyhookwireless.com/Coverage-Map>`_, but you can select another or several other location providers::
 
     apt install geoclue-skyhook
 
@@ -39,23 +39,25 @@ These don't seem to be working.
     geoclue-hostip
     geoclue-plazes
 
+`Mozilla Location Services <https://location.services.mozilla.com/map>`_ are also usable in Geoclue.
+
 
 Install
 -------
 ::
 
     pip install -e .
-    
-    
+
+
 Run
 ---
 Currently Python 2.7 is only supported version::
 
     ./locWifi.py
-    
+
 Troubleshooting
 ===============
-First of all, be sure ``geoclue-test-gui`` works. 
+First of all, be sure ``geoclue-test-gui`` works.
 If it doesn't, then there's likely an issue with DBUS or your WiFi systems.
 
 ---
@@ -74,3 +76,8 @@ Contributions
 The resurrection of this program currently requires Python 2.7 and the deprecated `dbus-python` package.
 We'd welcome pull requests building to Python 3 compatibility.
 The place to start would be with a Python 3 compatibile Python DBUS API.
+
+Notes
+=====
+
+* `Geoclue Reference Manual <https://www.freedesktop.org/software/geoclue/docs/>`_
