@@ -1,38 +1,29 @@
 language: python
-fast_finish: true
+sudo: required
+dist: xenial
+group: travis_latest
+
+git:
+  depth: 3
+  quiet: true
 
 python:
-  - 2.7
+- 2.7
 
 os:
-  - linux
-
-sudo: required
-dist: trusty
-group: edge
+- linux
 
 addons:
   apt:
     packages: ['dbus-x11','xvfb','libdbus-1-dev','libdbus-glib-1-dev','geoclue','geoclue-ubuntu-geoip','geoclue-plazes','geoclue-hostip']
 
-notifications:
-  email: false
-
-git:
-  depth: 3
-
-
 before_install:
-  - pip -q install coveralls
+# https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
+- sleep 3 # give xvfb some time to start
 
 install: pip install -e .
 
-before_script:
-# https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-a-GUI
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
-
 script: sudo ~/virtualenv/python2.7/bin/python -m coverage run tests/test.py
 
-after_success: coveralls
